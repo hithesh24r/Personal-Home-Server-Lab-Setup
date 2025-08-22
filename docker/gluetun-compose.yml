@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "8888:8888/tcp"   # HTTP proxy
+      - "8388:8388/tcp"   # Shadowsocks
+      - "8388:8388/udp"
+    environment:
+      - VPN_SERVICE_PROVIDER=surfshark
+      - VPN_TYPE=openvpn
+      - OPENVPN_USER=your_username
+      - OPENVPN_PASSWORD=your_password
+      - SERVER_COUNTRIES=Netherlands
+    volumes:
+      - /srv/gluetun:/gluetun
+    restart: unless-stopped
