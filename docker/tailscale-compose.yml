@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  tailscale:
+    image: tailscale/tailscale:stable
+    container_name: tailscale
+    hostname: home-server
+    network_mode: host
+    privileged: true
+    volumes:
+      - /srv/tailscale:/var/lib/tailscale
+    environment:
+      - TS_AUTHKEY=tskey-auth-xxxxxxxxxxxxxxxx
+    restart: unless-stopped
